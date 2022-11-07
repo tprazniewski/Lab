@@ -1,5 +1,5 @@
-import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
-
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from "typeorm";
+import { Sample } from "./Sample";
 @Entity()
 export class Patient {
   @PrimaryGeneratedColumn("increment")
@@ -16,4 +16,10 @@ export class Patient {
 
   @Column()
   dateOfBirth: Date;
+
+  @Column()
+  date: Date;
+
+  @OneToMany(() => Sample, (sample) => sample.patient)
+  sample: Sample[];
 }

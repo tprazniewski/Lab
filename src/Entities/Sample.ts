@@ -8,6 +8,7 @@ import {
 } from "typeorm";
 import { kind } from "./enums/kind";
 import { Order } from "./Order";
+import { Patient } from "./Patient";
 
 @Entity()
 export class Sample extends BaseEntity {
@@ -25,4 +26,10 @@ export class Sample extends BaseEntity {
     name: "order_id",
   })
   order: Order;
+
+  @ManyToOne(() => Order, (order) => order.sample, { onDelete: "CASCADE" })
+  @JoinColumn({
+    name: "patient_id",
+  })
+  patient: Patient;
 }
