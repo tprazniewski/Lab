@@ -21,13 +21,25 @@ export class Sample extends BaseEntity {
   })
   kind: kind;
 
-  @ManyToOne(() => Order, (order) => order.sample, { onDelete: "CASCADE" })
+  @ManyToOne(
+    () => Order, // We are going to return
+    (order) => order.sample,
+    {
+      onDelete: "CASCADE",
+    }
+  )
   @JoinColumn({
     name: "order_id",
   })
   order: Order;
 
-  @ManyToOne(() => Order, (order) => order.sample, { onDelete: "CASCADE" })
+  @ManyToOne(
+    () => Patient, // We are going to return
+    (patient) => patient.sample,
+    {
+      onDelete: "CASCADE",
+    }
+  )
   @JoinColumn({
     name: "patient_id",
   })

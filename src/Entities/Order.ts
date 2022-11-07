@@ -11,11 +11,15 @@ import { Sample } from "./Sample";
 
 @Entity()
 export class Order extends BaseEntity {
-  @PrimaryColumn("increment")
-  id: Number;
+  @PrimaryGeneratedColumn("increment")
+  id: number;
 
   @Column()
   date: Date;
-  @OneToMany(() => Sample, (sample) => sample.order)
+
+  @OneToMany(
+    () => Sample, // We are going to return
+    (sample) => sample.order
+  )
   sample: Sample[];
 }

@@ -1,5 +1,6 @@
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from "typeorm";
 import { Sample } from "./Sample";
+
 @Entity()
 export class Patient {
   @PrimaryGeneratedColumn("increment")
@@ -20,6 +21,9 @@ export class Patient {
   @Column()
   date: Date;
 
-  @OneToMany(() => Sample, (sample) => sample.patient)
+  @OneToMany(
+    () => Sample, // We are going to return
+    (sample) => sample.order
+  )
   sample: Sample[];
 }
