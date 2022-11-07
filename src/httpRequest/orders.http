@@ -8,13 +8,29 @@ Content-Type: application/json
 POST http://localhost:666/orders/
 Content-Type: application/json
 {
-    "date": "2022-11-03 "
+    "date": "2022-11-03 19:13:13"
      ,"sampleList": [ {
-        "patientId":"1",
+        "patientId":"4",
         "kind": "bloodTest"
     },{
-        "patientId":"1",
+        "patientId":"5",
+        "kind": "covidTest"
+    },{
+        "patientId":"8",
+        "kind": "covidTest"
+    },{
+        "patientId":"7",
         "kind": "bloodTest"
     }]
    
 }
+
+POST http://localhost:666/patients/
+Content-Type: application/json
+{
+    "firstName": "Edyta",
+    "lastName": "Prazniewska",
+    "email": "edytaaaa@gmail.com",
+    "dateOfBirth": "1989-08-05"
+}
+

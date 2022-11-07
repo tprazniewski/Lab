@@ -2,6 +2,7 @@ import express from "express";
 import bodyParser from "body-parser";
 import { appDataSource } from "./DB/mysql";
 import ordersRouter from "./Routes/orders";
+import patientsRouter from "./Routes/patient";
 import dotenv from "dotenv";
 
 dotenv.config();
@@ -11,6 +12,7 @@ const app = express();
 
 app.use(bodyParser.json());
 app.use("/orders", ordersRouter);
+app.use("/patients", patientsRouter);
 
 appDataSource
   .initialize()

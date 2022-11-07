@@ -1,8 +1,14 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from "typeorm";
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  OneToMany,
+  BaseEntity,
+} from "typeorm";
 import { Sample } from "./Sample";
 
 @Entity()
-export class Patient {
+export class Patient extends BaseEntity {
   @PrimaryGeneratedColumn("increment")
   id: number;
 
@@ -17,9 +23,6 @@ export class Patient {
 
   @Column()
   dateOfBirth: Date;
-
-  @Column()
-  date: Date;
 
   @OneToMany(
     () => Sample, // We are going to return
