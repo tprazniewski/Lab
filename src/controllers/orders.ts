@@ -14,6 +14,7 @@ export const addOrders: RequestHandler = (req, res) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) return res.status(400).send(errors.array());
   console.log(req.body.date);
+  console.log(req.body.sampleList);
   return res.send({ message: " Order added" });
 };
 export const updateOrders: RequestHandler = (req, res) => {

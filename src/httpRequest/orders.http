@@ -4,30 +4,17 @@ GET http://localhost:666/orders
 Content-Type: application/json
 
 
-POST http://localhost:666/orders/
-Content-Type: application/json
-{
-        "date": "2022-11-05",
-        "sampleList": [
-    {
-        "patientId":"1",
-        "kind": "bloodTest"
-    },
-    {
-        "patientId":"2",
-        "kind": "bloodTest"
-    },
-    {
-        "patientId":"3",
-        "kind": "covidTest"
-    },
-    ]
-}
-
 
 POST http://localhost:666/orders/
 Content-Type: application/json
 {
     "date": "2022-11-03 "
+     ,"sampleList": [ {
+        "patientId":"1",
+        "kind": "bloodTest"
+    },{
+        "patientId":"1",
+        "kind": "bloodTest"
+    }]
    
 }
