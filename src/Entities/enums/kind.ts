@@ -1,4 +1,4 @@
-export enum sampleTest {
+export enum kind {
   bloodTest = "bloodTest",
   covidTest = "covidTest",
 }
