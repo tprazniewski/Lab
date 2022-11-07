@@ -4,7 +4,10 @@ import {
   PrimaryGeneratedColumn,
   BaseEntity,
   Column,
+  OneToMany,
 } from "typeorm";
+
+import { Sample } from "./Sample";
 
 @Entity()
 export class Order extends BaseEntity {
@@ -13,4 +16,6 @@ export class Order extends BaseEntity {
 
   @Column()
   date: Date;
+  @OneToMany(() => Sample, (sample) => sample.order)
+  sample: Sample[];
 }
