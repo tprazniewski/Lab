@@ -1,4 +1,4 @@
-import { body, check, ValidationChain, query } from "express-validator";
+import { body, check, ValidationChain, param } from "express-validator";
 import { kind } from "../Entities/enums/kind";
 
 export const createValidator: ValidationChain[] = [
@@ -22,4 +22,13 @@ export const createValidator: ValidationChain[] = [
     .trim()
     .isIn([kind.bloodTest, kind.covidTest])
     .withMessage("kind can only be bloodTest or bloodTest "),
+];
+
+export const getOrderValdiator: ValidationChain[] = [
+  param("id")
+    .not()
+    .isEmpty()
+    .withMessage("The Id title mandatory")
+    .isNumeric()
+    .withMessage("Only Decimals allowed"),
 ];

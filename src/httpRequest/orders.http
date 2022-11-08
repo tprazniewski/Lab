@@ -2,6 +2,8 @@
 
 GET http://localhost:666/orders
 Content-Type: application/json
+GET http://localhost:666/orders/1
+Content-Type: application/json
 
 GET http://localhost:666/orders?patient_id=13&&samplekind=bloodTest&&date=2022-11-03
 Content-Type: application/json
