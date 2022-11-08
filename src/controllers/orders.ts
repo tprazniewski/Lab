@@ -9,8 +9,9 @@ import { kind } from "../Entities/enums/kind";
 interface Query {
   date: Date;
   patient_id: string;
-  kind: kind;
+  samplekind: kind;
 }
+
 export const getOrder: RequestHandler = (req, res) => {
   res.send({ message: " Order" });
 };
@@ -18,12 +19,13 @@ export const getOrders: RequestHandler = async (req, res) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) return res.status(400).send(errors.array());
 
-  const { date, patient_id, kind } = req.query as any as Query;
-  console.log("date", date);
+  const { date, patient_id, samplekind } = req.query as any as Query;
+  console.log("patient_id", patient_id);
+  console.log("samplekind", samplekind);
   const orders = await Order.find({
     where: {
       sample: {
-        kind: kind ? kind : undefined,
+        kind: samplekind ? samplekind : undefined,
         patient: { id: patient_id ? parseInt(patient_id) : undefined },
       },
     },

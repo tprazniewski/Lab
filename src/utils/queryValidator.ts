@@ -31,14 +31,13 @@ export const queryValidator: RequestHandler<
       message: `The kind of a sample doesn't match the requirements u migh have a white spaces or dont use the upper case letters`,
     });
   }
-  console.log(id);
   if (id === NaN) {
     return res.status(404).send({
       message: `The patientId must be a valid number`,
     });
   }
-  console.log("isvalid", isValidDate);
-  if (!isValidDate) {
+  if (date && !isValidDate) {
+    console.log("weszlo");
     return res.status(404).send({
       message: `The date is invalid`,
     });
