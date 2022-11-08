@@ -1,7 +1,9 @@
 import { RequestHandler } from "express";
 import { Patient } from "../Entities/Patient";
-
+import { validationResult } from "express-validator";
 export const addPatient: RequestHandler = async (req, res) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) return res.status(400).send(errors.array());
   const { firstName, lastName, email, dateOfBirth } = req.body;
 
   const result = await Patient.create({
@@ -10,5 +12,5 @@ export const addPatient: RequestHandler = async (req, res) => {
     email,
     dateOfBirth,
   }).save();
-  res.send(result);
+  return res.send(result);
 };
