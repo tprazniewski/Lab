@@ -19,7 +19,7 @@ export const getOrders: RequestHandler = async (req, res) => {
   if (!errors.isEmpty()) return res.status(400).send(errors.array());
 
   const { date, patient_id, kind } = req.query as any as Query;
-
+  console.log("date", date);
   const orders = await Order.find({
     where: {
       sample: {

@@ -24,7 +24,7 @@ export const queryValidator: RequestHandler<
   const { bloodTest, covidTest } = kind;
   const { date, samplekind, patient_id } = req.query;
   const id = Number(patient_id);
-  const regex = /\d{4}-\d{2}-\d{2}/;
+  const regex = /^\d{4}-\d{2}-\d{2}$/;
   const isValidDate = regex.test(date);
   if (samplekind && samplekind !== bloodTest && samplekind !== covidTest) {
     return res.status(404).send({
@@ -37,6 +37,11 @@ export const queryValidator: RequestHandler<
       message: `The patientId must be a valid number`,
     });
   }
-  console.log(isValidDate);
+  console.log("isvalid", isValidDate);
+  if (!isValidDate) {
+    return res.status(404).send({
+      message: `The date is invalid`,
+    });
+  }
   return next();
 };

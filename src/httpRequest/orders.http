@@ -3,7 +3,7 @@
 GET http://localhost:666/orders
 Content-Type: application/json
 
-GET http://localhost:666/orders?patient_id=4&&samplekind=bloodTest&&date=1992-09-15
+GET http://localhost:666/orders?patient_id=4&&samplekind=covidTest&&date=1992-09-15
 Content-Type: application/json
 
 
