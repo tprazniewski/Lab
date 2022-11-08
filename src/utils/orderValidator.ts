@@ -23,4 +23,3 @@ export const createValidator: ValidationChain[] = [
     .isIn([kind.bloodTest, kind.covidTest])
     .withMessage("kind can only be bloodTest or bloodTest "),
 ];
-// check("arr.*.user_id")
