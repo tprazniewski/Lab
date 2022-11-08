@@ -9,17 +9,20 @@ interface Query {
 
 export const queryValidator: RequestHandler = (req, res, next) => {
   const { bloodTest, covidTest } = kind;
-  const { date, samplekind, patientId } = req.query;
-  const id = Number(patientId);
-  if ((samplekind && samplekind !== bloodTest) || samplekind !== covidTest) {
+  const { date, samplekind, patient_id } = req.query;
+  const id = Number(patient_id);
+  console.log(typeof samplekind);
+  console.log(typeof kind.bloodTest);
+  if (samplekind && samplekind !== bloodTest && samplekind !== covidTest) {
     return res.status(404).send({
       message: `The kind of a sample doesn't match the requirements u migh have a white spaces or dont use the upper case letters`,
     });
   }
-  if (id !== NaN) {
+  console.log(id);
+  if (id === NaN) {
     return res.status(404).send({
       message: `The patientId must be a valid number`,
     });
   }
-  next();
+  return next();
 };
