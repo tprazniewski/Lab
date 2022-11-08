@@ -21,7 +21,7 @@ export class Patient extends BaseEntity {
   @Column({ unique: true })
   email: string;
 
-  @Column()
+  @Column({ type: "date" })
   dateOfBirth: Date;
 
   @OneToMany(

@@ -31,9 +31,9 @@ Content-Type: application/json
 POST http://localhost:666/patients/
 Content-Type: application/json
 {
-    "firstName": "Edyta",
-    "lastName": "Prazniewska",
-    "email": "edytaaaa@gmail.com",
-    "dateOfBirth": "1989-08-05"
+    "firstName": "Tomasz",
+    "lastName": "prazniewski",
+    "email": "to@gmail.com",
+    "dateOfBirth": "1989-08-05 19:55:55"
 }
 

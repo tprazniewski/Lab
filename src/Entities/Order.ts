@@ -14,7 +14,7 @@ export class Order extends BaseEntity {
   @PrimaryGeneratedColumn("increment")
   id: number;
 
-  @Column()
+  @Column({ type: "date" })
   date: Date;
 
   @OneToMany(
