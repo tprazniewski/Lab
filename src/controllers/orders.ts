@@ -24,6 +24,7 @@ export const getOrders: RequestHandler = async (req, res) => {
   console.log("samplekind", samplekind);
   const orders = await Order.find({
     where: {
+      date,
       sample: {
         kind: samplekind ? samplekind : undefined,
         patient: { id: patient_id ? parseInt(patient_id) : undefined },
@@ -31,7 +32,7 @@ export const getOrders: RequestHandler = async (req, res) => {
     },
   });
   console.log("ord", orders);
-  return res.send({ message: " Orders list" });
+  return res.send(orders);
 };
 export const addOrders: RequestHandler = async (req, res) => {
   const errors = validationResult(req);

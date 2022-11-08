@@ -3,7 +3,7 @@
 GET http://localhost:666/orders
 Content-Type: application/json
 
-GET http://localhost:666/orders?patient_id=4&&samplekind=covidTest&&date=1992-09-15
+GET http://localhost:666/orders?patient_id=13&&samplekind=bloodTest&&date=2022-11-03
 Content-Type: application/json
 
 
@@ -11,18 +11,18 @@ Content-Type: application/json
 POST http://localhost:666/orders/
 Content-Type: application/json
 {
-    "date": "2022-11-03 19:13:13"
+    "date": "2022-11-05"
      ,"sampleList": [ {
-        "patientId":"10",
+        "patientId":"14",
         "kind": "bloodTest"
     },{
-        "patientId":"11",
+        "patientId":"15",
         "kind": "covidTest"
     },{
-        "patientId":"12",
+        "patientId":"16",
         "kind": "covidTest"
     },{
-        "patientId":"13",
+        "patientId":"17",
         "kind": "bloodTest"
     }]
    
