@@ -5,12 +5,15 @@ export const addPatient: RequestHandler = async (req, res) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) return res.status(400).send(errors.array());
   const { firstName, lastName, email, dateOfBirth } = req.body;
-
-  const result = await Patient.create({
-    firstName,
-    lastName,
-    email,
-    dateOfBirth,
-  }).save();
-  return res.send(result);
+  try {
+    const result = await Patient.create({
+      firstName,
+      lastName,
+      email,
+      dateOfBirth,
+    }).save();
+    return res.send(result);
+  } catch (error) {
+    return res.status(404).send(error);
+  }
 };

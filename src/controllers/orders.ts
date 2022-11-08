@@ -21,13 +21,11 @@ export const getOrder: RequestHandler = async (req, res) => {
   if (!errors.isEmpty()) return res.status(400).send(errors.array());
   try {
     const { id } = req.params as any as Id;
-    console.log("id", id);
     const order = await Order.find({
       where: {
         id: parseInt(id),
       },
     });
-    console.log(order);
     return res.send(order);
   } catch (err) {
     return res.status(404).send(err);
@@ -38,19 +36,20 @@ export const getOrders: RequestHandler = async (req, res) => {
   if (!errors.isEmpty()) return res.status(400).send(errors.array());
 
   const { date, patient_id, samplekind } = req.query as any as Query;
-  console.log("patient_id", patient_id);
-  console.log("samplekind", samplekind);
-  const orders = await Order.find({
-    where: {
-      date,
-      sample: {
-        kind: samplekind ? samplekind : undefined,
-        patient: { id: patient_id ? parseInt(patient_id) : undefined },
+  try {
+    const orders = await Order.find({
+      where: {
+        date,
+        sample: {
+          kind: samplekind ? samplekind : undefined,
+          patient: { id: patient_id ? parseInt(patient_id) : undefined },
+        },
       },
-    },
-  });
-  console.log("ord", orders);
-  return res.send(orders);
+    });
+    return res.send(orders);
+  } catch (error) {
+    return res.status(404).send(error);
+  }
 };
 export const addOrders: RequestHandler = async (req, res) => {
   const errors = validationResult(req);
@@ -58,24 +57,30 @@ export const addOrders: RequestHandler = async (req, res) => {
 
   const { date } = req.body;
   const { sampleList } = req.body;
+  try {
+    const createOrder = await Order.create({ date }).save();
 
-  const createOrder = await Order.create({ date }).save();
+    try {
+      for await (const samplee of sampleList) {
+        const patientt = await Patient.findOneBy({
+          id: parseInt(samplee.patientId),
+        });
+        if (patientt) {
+          Sample.create({
+            kind: samplee.kind,
+            order: createOrder,
+            patient: patientt!,
+          }).save();
+        }
+      }
 
-  for await (const samplee of sampleList) {
-    const patientt = await Patient.findOneBy({
-      id: parseInt(samplee.patientId),
-    });
-    console.log("patientos", patientt);
-    if (patientt) {
-      Sample.create({
-        kind: samplee.kind,
-        order: createOrder,
-        patient: patientt!,
-      }).save();
+      return res.send({ message: " Order added" });
+    } catch (error) {
+      return res.status(404).send(error);
     }
+  } catch (error) {
+    return res.status(404).send(error);
   }
-
-  return res.send({ message: " Order added" });
 };
 export const updateOrders: RequestHandler = (req, res) => {
   res.send({ message: "Order updated" });

@@ -16,17 +16,18 @@ export const getSamples: RequestHandler = async (req, res) => {
   const { date, patient_id, samplekind } = req.query as any as Query;
   console.log("patient_id", patient_id);
   console.log("samplekind", samplekind);
-  const samples = await Sample.find({
-    where: {
-      kind: samplekind ? samplekind : undefined,
-      patient: { id: patient_id ? parseInt(patient_id) : undefined },
-      order: {
-        date,
+  try {
+    const samples = await Sample.find({
+      where: {
+        kind: samplekind ? samplekind : undefined,
+        patient: { id: patient_id ? parseInt(patient_id) : undefined },
+        order: {
+          date,
+        },
       },
-    },
-  });
-  console.log("samples", samples);
-  return res.send(samples);
+    });
+    return res.send(samples);
+  } catch (error) {
+    return res.status(404).send(error);
+  }
 };
-
-// get all samples for a given date, patient id, sample kind or a combination of those
