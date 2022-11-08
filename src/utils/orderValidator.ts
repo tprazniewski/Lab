@@ -1,4 +1,4 @@
-import { body, check, ValidationChain } from "express-validator";
+import { body, check, ValidationChain, query } from "express-validator";
 import { kind } from "../Entities/enums/kind";
 
 export const createValidator: ValidationChain[] = [

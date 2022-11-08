@@ -4,13 +4,32 @@ import { validationResult } from "express-validator";
 import { Order } from "../Entities/Order";
 import { Patient } from "../Entities/Patient";
 import { Sample } from "../Entities/Sample";
+import { kind } from "../Entities/enums/kind";
 
+interface Query {
+  date: Date;
+  patient_id: string;
+  kind: kind;
+}
 export const getOrder: RequestHandler = (req, res) => {
   res.send({ message: " Order" });
 };
-export const getOrders: RequestHandler = (req, res) => {
-  console.log("weszlo");
-  res.send({ message: " Orders list" });
+export const getOrders: RequestHandler = async (req, res) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) return res.status(400).send(errors.array());
+
+  const { date, patient_id, kind } = req.query as any as Query;
+
+  const orders = await Order.find({
+    where: {
+      sample: {
+        kind: kind ? kind : undefined,
+        patient: { id: patient_id ? parseInt(patient_id) : undefined },
+      },
+    },
+  });
+  console.log("ord", orders);
+  return res.send({ message: " Orders list" });
 };
 export const addOrders: RequestHandler = async (req, res) => {
   const errors = validationResult(req);
